@@ -1,17 +1,36 @@
 <h1>New User Account</h1>
 
-<form action="/users" method="post">
+<% if @user.errors.any? %>
+  <div style="color: red;">
+    <h3><%= pluralize(@user.errors.count, "error") %> prevented this account from being created:</h3>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @user, local: true do |f| %>
   <p>
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username">
+    <%= f.label :username, "Username" %><br>
+    <%= f.text_field :username %>
   </p>
+
   <p>
-    <label for="email">Email</label>
-    <input type="text" name="email" id="email">
+    <%= f.label :email, "Email" %><br>
+    <%= f.email_field :email %>
   </p>
+
   <p>
-    <label for="password">Password</label>
-    <input type="text" name="password" id="password">
+    <%= f.label :password, "Password" %><br>
+    <%= f.password_field :password %>
   </p>
-  <button>Signup</button>
-</form>
+
+  <p>
+    <%= f.label :password_confirmation, "Confirm Password" %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
+  <%= f.submit "Sign Up", class: "btn btn-primary" %>
+<% end %>
