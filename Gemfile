@@ -18,6 +18,7 @@ group :development do
   gem "sqlite3", "~> 1.4"
   gem "tabulo"
   gem "web-console"
+  gem "listen", "~> 3.3"
 end
 
 group :production do
