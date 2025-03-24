@@ -1,16 +1,20 @@
-<h1><%= @place["name"] %></h1>
+<h1><%= @place.name %></h1>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
+<%= link_to "Add Entry", new_place_entry_path(@place), class: "btn btn-primary mb-3" %>
 
-<p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
-</p>
-
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
+<div class="row">
+  <% @place.entries.where(user: current_user).each do |entry| %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <% if entry.image.attached? %>
+          <%= image_tag entry.image, class: "card-img-top", style: "max-height: 200px; object-fit: cover;" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= entry.title %></h5>
+          <p class="card-text"><%= entry.occurred_on %></p>
+          <%= link_to "View", place_entry_path(@place, entry), class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

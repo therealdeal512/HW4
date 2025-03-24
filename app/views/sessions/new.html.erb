@@ -1,19 +1,15 @@
-<h2>Login</h2>
+<h1>Login</h1>
 
-<% if flash[:alert] %>
-  <p style="color: red;"><%= flash[:alert] %></p>
-<% end %>
+<%= form_with url: login_path, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: "form-control" %>
+  </div>
 
-<%= form_with url: login_path, local: true do |f| %>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </p>
+  <div class="mb-3">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
 
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-
-  <%= f.submit "Login", class: "btn btn-primary" %>
+  <%= form.submit "Log In", class: "btn btn-primary" %>
 <% end %>

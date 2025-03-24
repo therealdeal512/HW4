@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  resources :places  # Keep existing routes
+  resources :places do
+    resources :entries
+  end
 end
+
+

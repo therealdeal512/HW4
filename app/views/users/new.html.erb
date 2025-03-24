@@ -1,36 +1,20 @@
-<h1>New User Account</h1>
+<h1>Sign Up</h1>
 
-<% if @user.errors.any? %>
-  <div style="color: red;">
-    <h3><%= pluralize(@user.errors.count, "error") %> prevented this account from being created:</h3>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+<%= form_with model: @user, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: "form-control" %>
   </div>
-<% end %>
 
-<%= form_with model: @user, local: true do |f| %>
-  <p>
-    <%= f.label :username, "Username" %><br>
-    <%= f.text_field :username %>
-  </p>
+  <div class="mb-3">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
 
-  <p>
-    <%= f.label :email, "Email" %><br>
-    <%= f.email_field :email %>
-  </p>
+  <div class="mb-3">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
+  </div>
 
-  <p>
-    <%= f.label :password, "Password" %><br>
-    <%= f.password_field :password %>
-  </p>
-
-  <p>
-    <%= f.label :password_confirmation, "Confirm Password" %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-
-  <%= f.submit "Sign Up", class: "btn btn-primary" %>
+  <%= form.submit "Create Account", class: "btn btn-primary" %>
 <% end %>

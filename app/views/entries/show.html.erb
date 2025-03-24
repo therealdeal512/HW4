@@ -1,0 +1,22 @@
+# app/views/entries/show.html.erb
+<h1><%= @entry.title %></h1>
+
+<div class="mb-4">
+  <strong>Date:</strong> <%= @entry.occurred_on %>
+</div>
+
+<div class="mb-4">
+  <strong>Description:</strong>
+  <p><%= @entry.description %></p>
+</div>
+
+<% if @entry.image.attached? %>
+  <div class="mb-4">
+    <strong>Photo:</strong>
+    <div>
+      <%= image_tag @entry.image, class: "img-fluid rounded shadow-sm", style: "max-height: 300px; object-fit: contain;" %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "Back to Place", place_path(@place), class: "btn btn-outline-primary" %>
