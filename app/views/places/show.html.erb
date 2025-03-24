@@ -1,18 +1,22 @@
-<h1><%= @place.name %></h1>
+<h1 class="mb-4"><%= @place.name %></h1>
 
-<%= link_to "Add Entry", new_place_entry_path(@place), class: "btn btn-primary mb-3" %>
+<div class="mb-3">
+  <%= link_to "New Entry", new_place_entry_path(@place), class: "btn btn-primary" %>
+</div>
 
 <div class="row">
-  <% @place.entries.where(user: current_user).each do |entry| %>
+  <% for entry in @place.entries %>
     <div class="col-md-4 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <% if entry.image.attached? %>
-          <%= image_tag entry.image, class: "card-img-top", style: "max-height: 200px; object-fit: cover;" %>
+          <%= image_tag entry.image, class: "card-img-top" %>
         <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= entry.title %></h5>
-          <p class="card-text"><%= entry.occurred_on %></p>
-          <%= link_to "View", place_entry_path(@place, entry), class: "btn btn-secondary" %>
+          <p class="card-text"><%= entry.description %></p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Occurred on <%= entry.occurred_on.strftime("%B %d, %Y") %></small>
         </div>
       </div>
     </div>

@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  root "places#index"
+  root "home#index"
 
+  # User sign up
+  get "/signup", to: "users#new", as: "signup"
   resources :users, only: [:new, :create]
-  get "/signup", to: "users#new"
 
-  resources :sessions, only: [:new, :create]
-  get "/login", to: "sessions#new"
+  # Login / logout
+  get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
+  delete "/logout", to: "sessions#destroy", as: "logout"
 
+  # Places & entries nested routes
   resources :places do
     resources :entries
   end

@@ -17,10 +17,10 @@ Rails.application.configure do
   config.active_record.migration_error = :page_load
   config.active_record.verbose_query_logs = true
 
-  # 🚫 Do not include config.assets.* here in Rails 7
-  # config.assets.debug = true
-  # config.assets.quiet = true
-
+  # Use evented file watcher for hot reloading
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # ✅ Allow Gitpod URLs (critical for working in Gitpod)
+  config.hosts << /.*\.gitpod\.io/
 end
 
